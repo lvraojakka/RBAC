@@ -107,3 +107,15 @@ export const update = async (req, res) => {
     }
     
 }
+
+export const get = async (req, res) => {
+
+        try {
+          const userId = req.user
+          const role = await Role.find({ name, createdBy:userId })
+          return res.status(200).json({status: true, message: 'Role fetched successfully', data: role })
+        } catch (error) {
+          return res.status(500).json({ status: false, message: 'internal server error'})
+
+        }
+};

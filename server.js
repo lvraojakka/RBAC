@@ -3,10 +3,12 @@ import "dotenv/config";
 import cors from "cors";
 import helmet from "helmet";
 import mongoose from "mongoose";
-
+import Routes from "./routes/index.js";
 const PORT= process.env.PORT
 const MONGO_URL = process.env.MONGO_URL
 const app = express()
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(cors())
 app.use(helmet())
 
@@ -27,7 +29,8 @@ mongoose.connect(MONGO_URL)
 
 
 
-
+// Routes
+app.use('/v1', Routes);
 
 
 
